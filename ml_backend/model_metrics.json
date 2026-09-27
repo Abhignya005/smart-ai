@@ -1,0 +1,32 @@
+{
+    "Activity_Recognition": {
+        "Logistic Regression": {
+            "Accuracy": 1.0,
+            "F1_Weighted": 1.0
+        },
+        "Random Forest": {
+            "Accuracy": 1.0,
+            "F1_Weighted": 1.0
+        }
+    },
+    "Feature_Importance": {
+        "motion_bedroom": 0.007,
+        "motion_kitchen": 0.104,
+        "motion_living": 0.186,
+        "door_main": 0.004,
+        "power_kitchen": 0.069,
+        "power_ac": 0.372,
+        "hour": 0.258,
+        "is_weekend": 0.0
+    },
+    "Energy_Forecasting": {
+        "Random Forest": {
+            "MAE": 0.358,
+            "RMSE": 0.791
+        },
+        "XGBoost": {
+            "MAE": 0.392,
+            "RMSE": 0.839
+        }
+    }
+}
