@@ -133,15 +133,8 @@ function AppHeader() {
     <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-background/85 px-3 backdrop-blur sm:px-4">
       <SidebarTrigger />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold">SmartHome ML Dashboard</p>
+        <p className="truncate text-sm font-semibold text-slate-700">PersonaSense AI Dashboard</p>
       </div>
-      <Badge
-        variant="outline"
-        className="gap-1.5 rounded-full border-primary/30 bg-primary/10 text-primary"
-      >
-        <span className="size-1.5 rounded-full bg-primary" />
-        Pure ML Mode
-      </Badge>
     </header>
   );
 }
