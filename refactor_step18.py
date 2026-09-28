@@ -1,4 +1,88 @@
-import { createFileRoute } from "@tanstack/react-router";
+import os
+import re
+
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+BACKEND_DIR = os.path.join(BASE_DIR, "ml_backend")
+ROUTES_DIR = os.path.join(BASE_DIR, "src", "routes")
+
+# 1. Create .env and .env.example
+env_path = os.path.join(BACKEND_DIR, ".env")
+env_example_path = os.path.join(BACKEND_DIR, ".env.example")
+env_content = "GROQ_API_KEY=YOUR_GROQ_API_KEY\n"
+if not os.path.exists(env_path):
+    with open(env_path, "w", encoding="utf-8") as f:
+        f.write(env_content)
+with open(env_example_path, "w", encoding="utf-8") as f:
+    f.write(env_content)
+
+# 2. Update backend main.py
+main_py_path = os.path.join(BACKEND_DIR, "main.py")
+with open(main_py_path, "r", encoding="utf-8") as f:
+    main_code = f.read()
+
+chat_endpoint = """
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+
+class ChatRequest(BaseModel):
+    messages: list
+    context: dict
+
+@app.post("/api/chat")
+async def chat_with_groq(req: ChatRequest):
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    if not groq_api_key or groq_api_key == "YOUR_GROQ_API_KEY":
+        return {"success": False, "error": "GROQ_API_KEY is missing or invalid in backend .env file."}
+        
+    try:
+        client = Groq(api_key=groq_api_key)
+        
+        system_prompt = f\"\"\"You are the AI Assistant for a Privacy-Preserving Personal Routine & Activity Intelligence platform.
+You are helping the user understand their dataset and Machine Learning results.
+Do NOT invent values. ONLY use the provided context below to answer questions. If the answer isn't in the context, say "Insufficient data to determine this."
+Keep answers concise, helpful, and focused on data science / ML insights.
+
+CURRENT ML CONTEXT:
+- Total Dataset Rows: {req.context.get('rows', 'Unknown')}
+- Routine Consistency Score: {req.context.get('consistency', 'Unknown')}
+- Current Detected Activity: {req.context.get('currentActivity', 'Unknown')} ({req.context.get('currentConf', 'Unknown')})
+- Predicted Next Activity: {req.context.get('nextActivity', 'Unknown')} ({req.context.get('nextConf', 'Unknown')})
+- Anomalies Detected: {req.context.get('anomalies', 'Unknown')}
+- Peak Energy: {req.context.get('peakEnergy', 'Unknown')}
+- Routine Drift Status: {req.context.get('driftInfo', {}).get('status', 'Unknown')} - {req.context.get('driftInfo', {}).get('text', 'Unknown')}
+\"\"\"
+        
+        messages = [{"role": "system", "content": system_prompt}]
+        
+        # Add user conversation history
+        for msg in req.messages:
+            messages.append({"role": msg["role"], "content": msg["content"]})
+            
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=messages,
+            temperature=0.3,
+            max_completion_tokens=512
+        )
+        
+        reply = completion.choices[0].message.content
+        return {"success": True, "reply": reply}
+    except Exception as e:
+        logger.error(f"Groq API Error: {e}", exc_info=True)
+        return {"success": False, "error": str(e)}
+"""
+
+if "/api/chat" not in main_code:
+    # Insert before the read_root endpoint or at the bottom
+    main_code = main_code.replace('if __name__ == "__main__":', chat_endpoint + '\nif __name__ == "__main__":')
+    with open(main_py_path, "w", encoding="utf-8") as f:
+        f.write(main_code)
+        
+# 3. Update assistant.tsx
+assistant_tsx_path = os.path.join(ROUTES_DIR, "assistant.tsx")
+assistant_content = """import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -115,3 +199,8 @@ function SmartHomeAIAnalyst() {
     </div>
   );
 }
+"""
+with open(assistant_tsx_path, "w", encoding="utf-8") as f:
+    f.write(assistant_content)
+
+print("Step 18 Completed: Groq API backend endpoint and React client added.")
