@@ -15,11 +15,8 @@ const items = [
   { title: "Activity Recognition", url: "/activity", icon: Activity },
   { title: "Routine Discovery", url: "/routine", icon: BarChart3 },
   { title: "ML Evaluation", url: "/evaluation", icon: FileSignature },
-  { title: "AI Assistant", url: "/assistant", icon: Bot },
   { title: "Anomaly Detection", url: "/anomalies", icon: ShieldAlert },
   { title: "Energy Intelligence", url: "/energy", icon: Zap },
-  { title: "Energy Forecasting", url: "/forecast", icon: LineChart },
-  { title: "Settings & Privacy", url: "/settings", icon: SettingsIcon },
 ] as const;
 
 export function AppSidebar() {
