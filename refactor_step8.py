@@ -1,4 +1,53 @@
-import { createFileRoute } from "@tanstack/react-router";
+import os
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+LIB_DIR = os.path.join(BASE_DIR, "src", "lib")
+ROUTES_DIR = os.path.join(BASE_DIR, "src", "routes")
+
+if not os.path.exists(LIB_DIR):
+    os.makedirs(LIB_DIR)
+
+files = {
+    "src/lib/datasetUtils.ts": """export function saveDataset(filename: string, headers: string[], data: any[]) {
+  localStorage.setItem('smarthome_dataset', JSON.stringify({ filename, headers, data }));
+}
+
+export function loadDataset() {
+  const raw = localStorage.getItem('smarthome_dataset');
+  if (!raw) return null;
+  return JSON.parse(raw);
+}
+
+export function detectFeatures(headers: string[]) {
+  const h = headers.map(s => s.toLowerCase());
+  return {
+      timestamp: h.some(s => s.includes('time') || s.includes('date')),
+      activity: h.some(s => s.includes('activity')),
+      room: h.some(s => s.includes('room') || s.includes('location')),
+      motion: h.some(s => s.includes('motion') || s.includes('pir')),
+      door: h.some(s => s.includes('door') || s.includes('contact')),
+      light: h.some(s => s.includes('light')),
+      appliance: h.some(s => s.includes('tv') || s.includes('ac') || s.includes('appliance')),
+      power: h.some(s => s.includes('power') || s.includes('energy') || s.includes('kw') || s.includes('watt')),
+  };
+}
+
+export function calculateQuality(data: any[], headers: string[]) {
+  if (data.length === 0) return { missing: 0, score: 0 };
+  let missing = 0;
+  let total = data.length * headers.length;
+  data.forEach(row => {
+      headers.forEach(h => {
+          if (row[h] === null || row[h] === undefined || row[h] === '') missing++;
+      });
+  });
+  return {
+      missing,
+      score: Math.max(0, Math.round(((total - missing) / total) * 100))
+  };
+}
+""",
+
+    "src/routes/ingestion.tsx": """import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CloudUpload, CheckCircle, Database } from "lucide-react";
@@ -162,3 +211,88 @@ function DataIngestion() {
     </div>
   );
 }
+""",
+
+    "src/routes/explorer.tsx": """import { createFileRoute } from "@tanstack/react-router";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { loadDataset } from "@/lib/datasetUtils";
+import { Database, AlertTriangle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/explorer")({
+  component: DatasetExplorer,
+});
+
+function DatasetExplorer() {
+  const [dataset, setDataset] = useState<any>(null);
+
+  useEffect(() => {
+      setDataset(loadDataset());
+  }, []);
+
+  if (!dataset) {
+      return (
+          <div className="space-y-6 h-[80vh] flex flex-col items-center justify-center">
+              <Database className="size-16 text-muted-foreground/30 mb-4" />
+              <h2 className="text-2xl font-bold">No Dataset Found</h2>
+              <p className="text-muted-foreground">Please upload a dataset in the Data Ingestion tab first.</p>
+              <Button asChild className="mt-4"><Link to="/ingestion">Go to Data Ingestion</Link></Button>
+          </div>
+      );
+  }
+
+  // Display only top 10 rows
+  const displayData = dataset.data.slice(0, 10);
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Dataset Explorer</h1>
+        <p className="text-muted-foreground mt-2">Inspect the raw ingested data ({dataset.filename}) before downstream analysis.</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Total Records</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold">{dataset.data.length.toLocaleString()}</div></CardContent></Card>
+        <Card><CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Total Features</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold">{dataset.headers.length}</div></CardContent></Card>
+        <Card><CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Status</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold text-green-600">ML Ready</div></CardContent></Card>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Raw Data Preview</CardTitle>
+          <CardDescription>Showing top 10 rows</CardDescription>
+        </CardHeader>
+        <CardContent className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {dataset.headers.map((h: string) => (
+                    <TableHead key={h} className="whitespace-nowrap">{h}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+                {displayData.map((row: any, i: number) => (
+                    <TableRow key={i}>
+                        {dataset.headers.map((h: string) => (
+                            <TableCell key={h} className="whitespace-nowrap text-sm">{row[h] !== undefined && row[h] !== null ? row[h].toString() : ''}</TableCell>
+                        ))}
+                    </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+"""
+}
+
+for filename, content in files.items():
+    with open(os.path.join(BASE_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(content)
+print("Step 8 completed.")
