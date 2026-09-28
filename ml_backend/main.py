@@ -392,7 +392,7 @@ CURRENT ML CONTEXT:
             messages.append({"role": msg["role"], "content": msg["content"]})
             
         completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama3-70b-8192",
             messages=messages,
             temperature=0.3,
             max_completion_tokens=512

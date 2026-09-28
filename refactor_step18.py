@@ -204,3 +204,4 @@ with open(assistant_tsx_path, "w", encoding="utf-8") as f:
     f.write(assistant_content)
 
 print("Step 18 Completed: Groq API backend endpoint and React client added.")
+
