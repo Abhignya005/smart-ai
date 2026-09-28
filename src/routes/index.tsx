@@ -57,7 +57,11 @@ function UnifiedDashboard() {
 // 1. DASHBOARD SUMMARY
 // ==========================================
 function DashboardSummary({ dataset }: { dataset: any }) {
-  const m = useMemo(() => calculateDashboardMetrics(dataset), [dataset]);
+  const m = useMemo(() => {
+      const res = dataset ? calculateDashboardMetrics(dataset) : null;
+      if (!res) return { isEmpty: true, rows: 0, consistency: '0%', anomalies: '0', peakEnergy: '0 kW' };
+      return res;
+  }, [dataset]);
   
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -119,8 +123,9 @@ function DashboardSummary({ dataset }: { dataset: any }) {
 // 2. ROUTINE SECTION
 // ==========================================
 function RoutineSection({ dataset }: { dataset: any }) {
-  const m = useMemo(() => calculateDashboardMetrics(dataset), [dataset]);
   if (!dataset || dataset.data.length === 0) return <div className="text-center p-8 text-muted-foreground">No dataset available for Activity & Routine Intelligence.</div>;
+  const m = calculateDashboardMetrics(dataset);
+  if (!m) return <div className="text-center p-8 text-muted-foreground">Insufficient data for Activity Intelligence.</div>;
   
   return (
     <div className="space-y-6">
