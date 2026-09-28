@@ -1,23 +1,27 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Activity, BarChart3, Database, FileUp, ShieldAlert,
-  Zap, Bot, LayoutDashboard, Settings as SettingsIcon, LineChart, FileSignature
+  Zap, Bot, LayoutDashboard, Settings as SettingsIcon, LineChart, FileSignature, Clock, TrendingUp, ShieldCheck, Cpu
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent,
-  SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
+  SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarFooter
 } from "@/components/ui/sidebar";
 
 const items = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Data Ingestion", url: "/ingestion", icon: FileUp },
+  { title: "Overview", url: "/", icon: LayoutDashboard },
+  { title: "Activity Intelligence", url: "/activity", icon: Activity },
+  { title: "My Routine", url: "/routine", icon: BarChart3 },
+  { title: "Timeline", url: "/timeline", icon: Clock },
+  { title: "Predictions", url: "/predictions", icon: TrendingUp },
+  { title: "Routine Changes", url: "/changes", icon: ShieldAlert },
+  { title: "Data Center", url: "/ingestion", icon: FileUp },
   { title: "Dataset Explorer", url: "/explorer", icon: Database },
-  { title: "Activity Recognition", url: "/activity", icon: Activity },
-  { title: "Routine Discovery", url: "/routine", icon: BarChart3 },
-  { title: "ML Evaluation", url: "/evaluation", icon: FileSignature },
   { title: "AI Assistant", url: "/assistant", icon: Bot },
-  { title: "Anomaly Detection", url: "/anomalies", icon: ShieldAlert },
-  { title: "Energy Intelligence", url: "/energy", icon: Zap },
+  { title: "Energy Insights", url: "/energy", icon: Zap },
+  { title: "Appliance Insights", url: "/appliances", icon: Cpu },
+  { title: "Privacy Center", url: "/privacy", icon: ShieldCheck },
+  { title: "ML Evaluation", url: "/evaluation", icon: FileSignature },
 ] as const;
 
 export function AppSidebar() {
@@ -31,17 +35,35 @@ export function AppSidebar() {
             <Activity className="size-4" />
           </div>
           <div className="min-w-0 group-data-[collapsible=icon]:hidden">
-            <p className="truncate text-sm font-semibold">SmartHome AI</p>
-            <p className="truncate text-xs text-muted-foreground">Privacy-Preserving ML</p>
+            <p className="truncate text-sm font-semibold">PersonaSense AI</p>
+            <p className="truncate text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Privacy-Preserving</p>
           </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Analytics Platform</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-xs font-semibold text-slate-400 tracking-wider">CORE INTELLIGENCE</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {items.slice(0, 6).map((item) => (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
+                    <Link to={item.url}>
+                      <item.icon className="size-4" />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold text-slate-400 tracking-wider">DATA & ANALYSIS</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.slice(6).map((item) => (
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
                     <Link to={item.url}>
@@ -55,6 +77,22 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="p-4 border-t bg-slate-50">
+          <div className="flex flex-col gap-2 group-data-[collapsible=icon]:hidden">
+              <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-slate-500">Dataset Status</span>
+                  <span className="text-xs font-bold text-green-600 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>ML Ready</span>
+              </div>
+              <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-slate-500">Privacy</span>
+                  <span className="text-xs font-bold text-blue-600 flex items-center gap-1"><ShieldCheck className="size-3"/>Protected</span>
+              </div>
+          </div>
+          <div className="hidden group-data-[collapsible=icon]:flex flex-col items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <ShieldCheck className="size-4 text-blue-600"/>
+          </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
