@@ -17,10 +17,8 @@ const items = [
   { title: "Routine Changes", url: "/changes", icon: ShieldAlert },
   { title: "Data Center", url: "/ingestion", icon: FileUp },
   { title: "Dataset Explorer", url: "/explorer", icon: Database },
-  { title: "AI Assistant", url: "/assistant", icon: Bot },
   { title: "Energy Insights", url: "/energy", icon: Zap },
   { title: "Appliance Insights", url: "/appliances", icon: Cpu },
-  { title: "Privacy Center", url: "/privacy", icon: ShieldCheck },
   { title: "ML Evaluation", url: "/evaluation", icon: FileSignature },
 ] as const;
 

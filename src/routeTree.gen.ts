@@ -13,14 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as AnomaliesRouteImport } from './routes/anomalies'
 import { Route as AppliancesRouteImport } from './routes/appliances'
-import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as ChangesRouteImport } from './routes/changes'
 import { Route as EnergyRouteImport } from './routes/energy'
 import { Route as EvaluationRouteImport } from './routes/evaluation'
 import { Route as ExplorerRouteImport } from './routes/explorer'
 import { Route as IngestionRouteImport } from './routes/ingestion'
 import { Route as PredictionsRouteImport } from './routes/predictions'
-import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RoutineRouteImport } from './routes/routine'
 import { Route as TimelineRouteImport } from './routes/timeline'
 
@@ -42,11 +40,6 @@ const AnomaliesRoute = AnomaliesRouteImport.update({
 const AppliancesRoute = AppliancesRouteImport.update({
   id: '/appliances',
   path: '/appliances',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssistantRoute = AssistantRouteImport.update({
-  id: '/assistant',
-  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChangesRoute = ChangesRouteImport.update({
@@ -79,11 +72,6 @@ const PredictionsRoute = PredictionsRouteImport.update({
   path: '/predictions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RoutineRoute = RoutineRouteImport.update({
   id: '/routine',
   path: '/routine',
@@ -100,14 +88,12 @@ export interface FileRoutesByFullPath {
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
   '/appliances': typeof AppliancesRoute
-  '/assistant': typeof AssistantRoute
   '/changes': typeof ChangesRoute
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
   '/ingestion': typeof IngestionRoute
   '/predictions': typeof PredictionsRoute
-  '/privacy': typeof PrivacyRoute
   '/routine': typeof RoutineRoute
   '/timeline': typeof TimelineRoute
 }
@@ -116,14 +102,12 @@ export interface FileRoutesByTo {
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
   '/appliances': typeof AppliancesRoute
-  '/assistant': typeof AssistantRoute
   '/changes': typeof ChangesRoute
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
   '/ingestion': typeof IngestionRoute
   '/predictions': typeof PredictionsRoute
-  '/privacy': typeof PrivacyRoute
   '/routine': typeof RoutineRoute
   '/timeline': typeof TimelineRoute
 }
@@ -133,14 +117,12 @@ export interface FileRoutesById {
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
   '/appliances': typeof AppliancesRoute
-  '/assistant': typeof AssistantRoute
   '/changes': typeof ChangesRoute
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
   '/ingestion': typeof IngestionRoute
   '/predictions': typeof PredictionsRoute
-  '/privacy': typeof PrivacyRoute
   '/routine': typeof RoutineRoute
   '/timeline': typeof TimelineRoute
 }
@@ -151,14 +133,12 @@ export interface FileRouteTypes {
     | '/activity'
     | '/anomalies'
     | '/appliances'
-    | '/assistant'
     | '/changes'
     | '/energy'
     | '/evaluation'
     | '/explorer'
     | '/ingestion'
     | '/predictions'
-    | '/privacy'
     | '/routine'
     | '/timeline'
   fileRoutesByTo: FileRoutesByTo
@@ -167,14 +147,12 @@ export interface FileRouteTypes {
     | '/activity'
     | '/anomalies'
     | '/appliances'
-    | '/assistant'
     | '/changes'
     | '/energy'
     | '/evaluation'
     | '/explorer'
     | '/ingestion'
     | '/predictions'
-    | '/privacy'
     | '/routine'
     | '/timeline'
   id:
@@ -183,14 +161,12 @@ export interface FileRouteTypes {
     | '/activity'
     | '/anomalies'
     | '/appliances'
-    | '/assistant'
     | '/changes'
     | '/energy'
     | '/evaluation'
     | '/explorer'
     | '/ingestion'
     | '/predictions'
-    | '/privacy'
     | '/routine'
     | '/timeline'
   fileRoutesById: FileRoutesById
@@ -200,14 +176,12 @@ export interface RootRouteChildren {
   ActivityRoute: typeof ActivityRoute
   AnomaliesRoute: typeof AnomaliesRoute
   AppliancesRoute: typeof AppliancesRoute
-  AssistantRoute: typeof AssistantRoute
   ChangesRoute: typeof ChangesRoute
   EnergyRoute: typeof EnergyRoute
   EvaluationRoute: typeof EvaluationRoute
   ExplorerRoute: typeof ExplorerRoute
   IngestionRoute: typeof IngestionRoute
   PredictionsRoute: typeof PredictionsRoute
-  PrivacyRoute: typeof PrivacyRoute
   RoutineRoute: typeof RoutineRoute
   TimelineRoute: typeof TimelineRoute
 }
@@ -240,13 +214,6 @@ declare module '@tanstack/react-router' {
       path: '/appliances'
       fullPath: '/appliances'
       preLoaderRoute: typeof AppliancesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assistant': {
-      id: '/assistant'
-      path: '/assistant'
-      fullPath: '/assistant'
-      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/changes': {
@@ -291,13 +258,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PredictionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/routine': {
       id: '/routine'
       path: '/routine'
@@ -320,14 +280,12 @@ const rootRouteChildren: RootRouteChildren = {
   ActivityRoute: ActivityRoute,
   AnomaliesRoute: AnomaliesRoute,
   AppliancesRoute: AppliancesRoute,
-  AssistantRoute: AssistantRoute,
   ChangesRoute: ChangesRoute,
   EnergyRoute: EnergyRoute,
   EvaluationRoute: EvaluationRoute,
   ExplorerRoute: ExplorerRoute,
   IngestionRoute: IngestionRoute,
   PredictionsRoute: PredictionsRoute,
-  PrivacyRoute: PrivacyRoute,
   RoutineRoute: RoutineRoute,
   TimelineRoute: TimelineRoute,
 }
