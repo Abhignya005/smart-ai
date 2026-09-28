@@ -135,13 +135,6 @@ function AppHeader() {
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold">SmartHome ML Dashboard</p>
       </div>
-      <Badge
-        variant="outline"
-        className="gap-1.5 rounded-full border-primary/30 bg-primary/10 text-primary"
-      >
-        <span className="size-1.5 rounded-full bg-primary" />
-        Pure ML Mode
-      </Badge>
     </header>
   );
 }
