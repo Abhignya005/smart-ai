@@ -1,4 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import os
+
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+ROUTES_DIR = os.path.join(BASE_DIR, "src", "routes")
+
+ingestion_content = """import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CloudUpload, CheckCircle, FileUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -206,3 +211,9 @@ function DataIngestion() {
     </div>
   );
 }
+"""
+
+with open(os.path.join(ROUTES_DIR, "ingestion.tsx"), "w", encoding="utf-8") as f:
+    f.write(ingestion_content)
+
+print("Fixed ingestion to parse real datasets instead of intercepting them for the demo.")
