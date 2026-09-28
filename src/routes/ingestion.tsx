@@ -165,8 +165,8 @@ function DataIngestion() {
                      <div className="flex justify-between border-b pb-2 text-sm"><span>Temporal Features (Generated)</span><Badge variant="outline">Hour, Day, Weekend</Badge></div>
                  </div>
 
-                 <div className="flex justify-end pt-4">
-                     <Button variant="outline" size="sm" onClick={() => { localStorage.removeItem('smarthome_dataset'); setDatasetMeta(null); }}>Upload Different File</Button>
+                 <div className="flex justify-end gap-3 pt-4 border-t mt-6">
+                     <Button variant="destructive" onClick={() => { localStorage.removeItem('smarthome_dataset'); setDatasetMeta(null); }}>Remove File & Clear Data</Button>
                  </div>
              </CardContent>
           </Card>
