@@ -317,3 +317,4 @@ with open(os.path.join(ROUTES_DIR, "energy.tsx"), "w", encoding="utf-8") as f:
     f.write(file_content)
 
 print("energy.tsx completely overhauled.")
+

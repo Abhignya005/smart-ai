@@ -17,7 +17,6 @@ import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as EnergyRouteImport } from './routes/energy'
 import { Route as EvaluationRouteImport } from './routes/evaluation'
 import { Route as ExplorerRouteImport } from './routes/explorer'
-import { Route as ForecastRouteImport } from './routes/forecast'
 import { Route as IngestionRouteImport } from './routes/ingestion'
 import { Route as RoutineRouteImport } from './routes/routine'
 import { Route as SettingsRouteImport } from './routes/settings'
@@ -62,11 +61,6 @@ const ExplorerRoute = ExplorerRouteImport.update({
   path: '/explorer',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ForecastRoute = ForecastRouteImport.update({
-  id: '/forecast',
-  path: '/forecast',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IngestionRoute = IngestionRouteImport.update({
   id: '/ingestion',
   path: '/ingestion',
@@ -92,7 +86,6 @@ export interface FileRoutesByFullPath {
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
-  '/forecast': typeof ForecastRoute
   '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
   '/settings': typeof SettingsRoute
@@ -106,7 +99,6 @@ export interface FileRoutesByTo {
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
-  '/forecast': typeof ForecastRoute
   '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
   '/settings': typeof SettingsRoute
@@ -121,7 +113,6 @@ export interface FileRoutesById {
   '/energy': typeof EnergyRoute
   '/evaluation': typeof EvaluationRoute
   '/explorer': typeof ExplorerRoute
-  '/forecast': typeof ForecastRoute
   '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
   '/settings': typeof SettingsRoute
@@ -137,7 +128,6 @@ export interface FileRouteTypes {
     | '/energy'
     | '/evaluation'
     | '/explorer'
-    | '/forecast'
     | '/ingestion'
     | '/routine'
     | '/settings'
@@ -151,7 +141,6 @@ export interface FileRouteTypes {
     | '/energy'
     | '/evaluation'
     | '/explorer'
-    | '/forecast'
     | '/ingestion'
     | '/routine'
     | '/settings'
@@ -165,7 +154,6 @@ export interface FileRouteTypes {
     | '/energy'
     | '/evaluation'
     | '/explorer'
-    | '/forecast'
     | '/ingestion'
     | '/routine'
     | '/settings'
@@ -180,7 +168,6 @@ export interface RootRouteChildren {
   EnergyRoute: typeof EnergyRoute
   EvaluationRoute: typeof EvaluationRoute
   ExplorerRoute: typeof ExplorerRoute
-  ForecastRoute: typeof ForecastRoute
   IngestionRoute: typeof IngestionRoute
   RoutineRoute: typeof RoutineRoute
   SettingsRoute: typeof SettingsRoute
@@ -244,13 +231,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExplorerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/forecast': {
-      id: '/forecast'
-      path: '/forecast'
-      fullPath: '/forecast'
-      preLoaderRoute: typeof ForecastRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ingestion': {
       id: '/ingestion'
       path: '/ingestion'
@@ -284,7 +264,6 @@ const rootRouteChildren: RootRouteChildren = {
   EnergyRoute: EnergyRoute,
   EvaluationRoute: EvaluationRoute,
   ExplorerRoute: ExplorerRoute,
-  ForecastRoute: ForecastRoute,
   IngestionRoute: IngestionRoute,
   RoutineRoute: RoutineRoute,
   SettingsRoute: SettingsRoute,
