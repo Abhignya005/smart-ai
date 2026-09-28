@@ -18,7 +18,6 @@ const items = [
   { title: "AI Assistant", url: "/assistant", icon: Bot },
   { title: "Anomaly Detection", url: "/anomalies", icon: ShieldAlert },
   { title: "Energy Intelligence", url: "/energy", icon: Zap },
-  { title: "Settings & Privacy", url: "/settings", icon: SettingsIcon },
 ] as const;
 
 export function AppSidebar() {
