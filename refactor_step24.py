@@ -217,3 +217,4 @@ with open(os.path.join(ROUTES_DIR, "index.tsx"), "w", encoding="utf-8") as f:
     f.write(index_content)
     
 print("Updated index.tsx dynamically.")
+

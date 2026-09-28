@@ -7,6 +7,9 @@ import { calculateDashboardMetrics } from "@/lib/mlUtils";
 import { useState, useEffect, useMemo } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 export const Route = createFileRoute("/")({
   component: DashboardOverview,
 });
@@ -31,11 +34,30 @@ function DashboardOverview() {
       return m.timeline.filter((t: any) => t.date === selectedDate);
   }, [m, selectedDate]);
 
+  const handleExportReport = () => {
+      if (!m || m.isEmpty) return;
+      const report = `SmartHome AI - Activity Report\n============================\nRecords Analyzed: ${m.rows}\nRoutine Consistency: ${m.consistency}\nAnomalies Detected: ${m.anomalies}\nPeak Energy: ${m.peakEnergy}\n\nCurrent Activity: ${m.currentActivity} (Confidence: ${m.currentConf})\nNext Prediction: ${m.nextActivity} (Probability: ${m.nextConf})\n\nRecent Timeline:\n${filteredTimeline.map((t:any) => `- ${t.date} ${t.time}: ${t.activity}`).join('\n')}`;
+      const blob = new Blob([report], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `smarthome_report_${new Date().toISOString().split('T')[0]}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-6 pb-16">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">SmartHome ML Dashboard</h1>
-        <p className="text-muted-foreground mt-2">Privacy-first behavioral intelligence & analytics.</p>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">SmartHome ML Dashboard</h1>
+          <p className="text-muted-foreground mt-2">Privacy-first behavioral intelligence & analytics.</p>
+        </div>
+        <Button variant="outline" className="gap-2" onClick={handleExportReport} disabled={m.isEmpty}>
+          <Download className="size-4" /> Export Report
+        </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
