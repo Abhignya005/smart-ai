@@ -1,4 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import os
+
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+ROUTES_DIR = os.path.join(BASE_DIR, "src", "routes")
+LIB_DIR = os.path.join(BASE_DIR, "src", "lib")
+
+index_content = """import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Activity, TrendingUp, History, ShieldAlert, Zap, Database, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -205,3 +211,9 @@ function DashboardOverview() {
     </div>
   );
 }
+"""
+
+with open(os.path.join(ROUTES_DIR, "index.tsx"), "w", encoding="utf-8") as f:
+    f.write(index_content)
+    
+print("Updated index.tsx dynamically.")
