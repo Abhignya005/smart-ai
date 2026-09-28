@@ -138,3 +138,4 @@ with open(os.path.join(ROUTES_DIR, "privacy.tsx"), "w", encoding="utf-8") as f:
     f.write(privacy_content)
 
 print("Created new Index and Privacy pages.")
+

@@ -213,3 +213,4 @@ with open(os.path.join(ROUTES_DIR, "changes.tsx"), "w", encoding="utf-8") as f:
     f.write(changes_content)
 
 print("Created Timeline, Predictions, and Changes pages.")
+
