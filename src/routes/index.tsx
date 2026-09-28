@@ -1,3 +1,5 @@
+import { loadDataset } from '@/lib/datasetUtils';
+import { useEffect, useState } from 'react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Activity, ShieldAlert, Zap, BarChart3, Bot, Database, Cpu } from "lucide-react";
@@ -22,7 +24,7 @@ function Dashboard() {
             <Database className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">125,430</div>
+            <div className="text-2xl font-bold">{rowCount}</div>
             <p className="text-xs text-muted-foreground">Rows analyzed</p>
           </CardContent>
         </Card>
@@ -84,10 +86,10 @@ function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="bg-muted p-4 rounded-md text-sm space-y-2">
-              <p>• <b>Energy:</b> The AC unit is responsible for 42% of total peak load.</p>
-              <p>• <b>Routine:</b> Dinner usually begins around 8:14 PM with high consistency.</p>
-              <p>• <b>Safety:</b> An unusual appliance event was detected at 3:12 AM.</p>
-              <p>• <b>Optimization:</b> Shifting heavy appliance usage to post-9PM could reduce peak demand by 15%.</p>
+              <p>ï¿½ <b>Energy:</b> The AC unit is responsible for 42% of total peak load.</p>
+              <p>ï¿½ <b>Routine:</b> Dinner usually begins around 8:14 PM with high consistency.</p>
+              <p>ï¿½ <b>Safety:</b> An unusual appliance event was detected at 3:12 AM.</p>
+              <p>ï¿½ <b>Optimization:</b> Shifting heavy appliance usage to post-9PM could reduce peak demand by 15%.</p>
             </div>
             <Button variant="outline" asChild className="w-full mt-4"><Link to="/assistant">Ask AI Assistant</Link></Button>
           </CardContent>
@@ -96,3 +98,4 @@ function Dashboard() {
     </div>
   );
 }
+
