@@ -97,3 +97,4 @@ with open(os.path.join(ROUTES_DIR, "explorer.tsx"), "w", encoding="utf-8") as f:
     f.write(file_content)
 
 print("Explorer updated to show all rows and format binary values.")
+

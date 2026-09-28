@@ -1,4 +1,9 @@
-export function calculateDashboardMetrics(dataset: any) {
+import os
+
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+LIB_DIR = os.path.join(BASE_DIR, "src", "lib")
+
+file_content = """export function calculateDashboardMetrics(dataset: any) {
     if (!dataset || !dataset.data || dataset.data.length === 0) return null;
     const data = dataset.data;
     const headers = dataset.headers.map((h: string) => h.toLowerCase());
@@ -248,3 +253,9 @@ export function calculateDashboardMetrics(dataset: any) {
         cols: { powerCol, activityCol, timeCol, motionCol, roomCol, applianceCol }
     };
 }
+"""
+
+with open(os.path.join(LIB_DIR, "mlUtils.ts"), "w", encoding="utf-8") as f:
+    f.write(file_content)
+
+print("mlUtils.ts updated.")
