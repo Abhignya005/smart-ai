@@ -1,4 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import os
+
+BASE_DIR = r"c:\Users\abhignya\Downloads\my-smart-beat-main\my-smart-beat-main"
+ROUTES_DIR = os.path.join(BASE_DIR, "src", "routes")
+
+file_content = """import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { loadDataset } from "@/lib/datasetUtils";
@@ -86,3 +91,9 @@ function DatasetExplorer() {
     </div>
   );
 }
+"""
+
+with open(os.path.join(ROUTES_DIR, "explorer.tsx"), "w", encoding="utf-8") as f:
+    f.write(file_content)
+
+print("Explorer updated to show all rows and format binary values.")
