@@ -102,8 +102,8 @@ function DataIngestion() {
     <div className="space-y-6">
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Upload Historical Activity Data</h1>
-          <p className="text-muted-foreground mt-2 max-w-2xl">Upload a CSV or Excel dataset containing anonymous ambient activity records. The platform analyzes the historical data to learn personal routines and activity patterns.</p>
+          <h1 className="text-3xl font-bold tracking-tight">Data Ingestion</h1>
+          <p className="text-muted-foreground mt-2">Upload raw household data to begin the ML pipeline.</p>
         </div>
         <Button variant="outline" onClick={() => handleDemoLoad()} disabled={loading}>Load Synthetic Demo Dataset</Button>
       </div>
@@ -123,10 +123,12 @@ function DataIngestion() {
               </div>
               <div className="text-center">
                 <h3 className="font-semibold text-lg">Upload Your Dataset</h3>
-                <p className="text-sm text-muted-foreground">Drop CSV or Excel file here, or click to browse.</p>
+                <p className="text-sm text-muted-foreground">Drag & Drop your file here, or click to browse.</p>
                 <div className="flex gap-2 mt-2 justify-center">
-                    <Badge variant="outline">.csv</Badge>
-                    <Badge variant="outline">.xlsx</Badge>
+                    <Badge variant="outline">CSV</Badge>
+                    <Badge variant="outline">XLSX</Badge>
+                    <Badge variant="outline">PDF</Badge>
+                    <Badge variant="outline">JSON</Badge>
                 </div>
               </div>
               <Button onClick={() => fileInputRef.current?.click()} disabled={loading}>
@@ -165,8 +167,8 @@ function DataIngestion() {
                      <div className="flex justify-between border-b pb-2 text-sm"><span>Temporal Features (Generated)</span><Badge variant="outline">Hour, Day, Weekend</Badge></div>
                  </div>
 
-                 <div className="flex justify-end gap-3 pt-4 border-t mt-6">
-                     <Button variant="destructive" onClick={() => { localStorage.removeItem('smarthome_dataset'); setDatasetMeta(null); }}>Remove File & Clear Data</Button>
+                 <div className="flex justify-end pt-4">
+                     <Button variant="outline" size="sm" onClick={() => { localStorage.removeItem('smarthome_dataset'); setDatasetMeta(null); }}>Upload Different File</Button>
                  </div>
              </CardContent>
           </Card>
