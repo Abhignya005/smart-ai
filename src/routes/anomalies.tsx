@@ -1,101 +1,77 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { ShieldAlert, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/anomalies")({
-  component: AnomaliesDetection,
+  component: AnomalyDetection,
 });
 
-function AnomaliesDetection() {
-  const [data, setData] = useState<any>(null);
-
-  useEffect(() => {
-    fetch('http://localhost:8000/api/detect/anomaly')
-      .then(res => res.json())
-      .then(json => {
-        if (json.success) setData(json.anomalies);
-      })
-      .catch(err => console.error(err));
-  }, []);
-
-  if (!data) return <div className="p-8">Loading ML Anomaly Detection...</div>;
-
-  const current = data[data.length - 1];
-  const detectedAnomalies = data.filter((d: any) => d.is_anomaly);
-
+function AnomalyDetection() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">ML Anomaly Detection</h1>
-        <p className="text-muted-foreground mt-2">Unsupervised outlier detection using Isolation Forest</p>
+      <div className="flex justify-between items-end">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Anomaly & Safety Detection</h1>
+          <p className="text-muted-foreground mt-2">Isolation Forest implementation to flag statistically significant deviations.</p>
+        </div>
+        <Badge variant="outline" className="bg-blue-50 text-blue-700 py-1">Model Ready</Badge>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Current Status</CardTitle>
-            <CardDescription>Based on real-time Isolation Forest scoring</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-4xl font-bold text-primary">
-                  {current.is_anomaly ? "Anomalous" : "Normal"}
-                </span>
-                <Badge variant={current.is_anomaly ? "destructive" : "default"} className="text-sm">
-                  Score: {current.score.toFixed(3)}
-                </Badge>
-              </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                The Isolation Forest model considers this behavior {current.is_anomaly ? "highly unusual" : "expected"} compared to historical routines.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Anomalies Found</CardTitle>
-            <CardDescription>Out of the last 50 samples</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-bold text-destructive mb-2">
-              {detectedAnomalies.length}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Anomalies are flagged when power consumption and motion patterns deviate significantly from the baseline.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Anomaly Feed</CardTitle>
-          <CardDescription>Historical flagged events</CardDescription>
+      <Card className="border-orange-200 shadow-sm">
+        <CardHeader className="bg-orange-50/50 pb-4">
+          <CardTitle className="flex items-center gap-2 text-orange-700">
+             <AlertCircle className="size-5" /> Unusual activity detected. Review the event.
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {detectedAnomalies.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No recent anomalies detected in the sample window.</p>
-            ) : (
-              detectedAnomalies.slice().reverse().map((a: any, i: number) => (
-                <div key={i} className="flex items-center justify-between p-3 border rounded-lg border-red-500/20 bg-red-500/5">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-red-600">Unusual Activity Detected</span>
-                    <span className="text-xs text-muted-foreground">{a.timestamp}</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm font-medium">{a.power.toFixed(1)}W Power, {a.motion_count} Motions</div>
-                    <div className="text-xs text-muted-foreground">Activity: {a.actual_activity}</div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+        <CardContent className="pt-4 space-y-4">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+               <div className="space-y-3">
+                   <div>
+                       <p className="text-xs text-muted-foreground font-semibold uppercase">Timestamp</p>
+                       <p className="font-medium">Today, 3:12 AM</p>
+                   </div>
+                   <div>
+                       <p className="text-xs text-muted-foreground font-semibold uppercase">Sensor Evidence</p>
+                       <p className="font-medium">Oven Active (Power Spiked to 2.4 kW)</p>
+                   </div>
+               </div>
+               <div className="space-y-3">
+                   <div>
+                       <p className="text-xs text-muted-foreground font-semibold uppercase">Expected Behavior</p>
+                       <p className="font-medium text-green-700">Oven usage between 6 PM–9 PM (Cooking Routine)</p>
+                   </div>
+                   <div>
+                       <p className="text-xs text-muted-foreground font-semibold uppercase">Observed Behavior</p>
+                       <p className="font-medium text-red-600">Oven active at 3:12 AM</p>
+                   </div>
+               </div>
+           </div>
+           
+           <div className="bg-muted p-4 rounded-md flex justify-between items-center mt-4">
+               <div>
+                   <p className="font-bold">Anomaly Score: -0.84</p>
+                   <p className="text-sm text-muted-foreground">High deviation from clustered behavioral norms.</p>
+               </div>
+               <div className="space-x-2">
+                   <Button variant="outline" size="sm">Dismiss</Button>
+                   <Button size="sm" variant="destructive">Flag for Review</Button>
+               </div>
+           </div>
         </CardContent>
       </Card>
+      
+      <h3 className="text-lg font-semibold mt-8 mb-2">Historical Log</h3>
+      <div className="border rounded-md divide-y">
+         <div className="p-4 flex justify-between items-center">
+            <div className="flex gap-4 items-center">
+                <CheckCircle2 className="text-green-500 size-5" />
+                <div><p className="font-medium text-sm">Routine Normalcy</p><p className="text-xs text-muted-foreground">Yesterday, 11:00 PM</p></div>
+            </div>
+            <Badge variant="outline">Score: 0.92</Badge>
+         </div>
+      </div>
     </div>
   );
 }

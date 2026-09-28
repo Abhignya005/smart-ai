@@ -214,6 +214,50 @@ async def run_ml_task(req: MLTaskRequest):
             anomalies = int(np.sum(preds == -1))
             results = {"anomalies_detected": anomalies, "total_samples": len(df)}
             
+        elif req.task == "routine":
+            if 'total_power' not in df.columns:
+                 return {"success": False, "error": "Missing 'total_power' column."}
+            
+            if 'timestamp' in df.columns:
+                df['hour'] = pd.to_datetime(df['timestamp']).dt.hour
+            else:
+                df['hour'] = 12
+                
+            from sklearn.cluster import KMeans
+            
+            # Simple 3-cluster routine learning
+            X = df[['total_power', 'hour']].dropna()
+            
+            if len(X) < 3:
+                return {"success": False, "error": "Not enough data points for routine learning."}
+                
+            kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+            df['Routine_Cluster'] = kmeans.fit_predict(X)
+            
+            cluster_centers = kmeans.cluster_centers_
+            
+            # Formulate human-readable routines
+            routines = []
+            for i, center in enumerate(cluster_centers):
+                power = center[0]
+                hour = int(center[1])
+                
+                time_of_day = "Morning" if 5 <= hour < 12 else "Afternoon" if 12 <= hour < 17 else "Evening" if 17 <= hour < 22 else "Night"
+                intensity = "High Activity" if power > 3.0 else "Medium Activity" if power > 1.0 else "Low Activity"
+                
+                routines.append({
+                    "cluster_id": i,
+                    "typical_time": f"{hour}:00",
+                    "time_of_day": time_of_day,
+                    "average_power": round(power, 2),
+                    "behavior_profile": f"{time_of_day} - {intensity}"
+                })
+                
+            results = {
+                "discovered_routines": routines,
+                "message": "Successfully clustered historical behaviors."
+            }
+            
         else:
             return {"success": False, "error": "Task not implemented yet."}
             
@@ -224,6 +268,10 @@ async def run_ml_task(req: MLTaskRequest):
         return {"success": False, "error": str(e)}
 
 # Include the previous endpoints for the dashboard views
+@app.get("/")
+def read_root():
+    return {"status": "online", "message": "Smart Appliance ML Backend API is running."}
+
 @app.get("/api/metrics")
 def get_metrics():
     try:

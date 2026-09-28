@@ -12,13 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as AnomaliesRouteImport } from './routes/anomalies'
-import { Route as ApplianceRouteImport } from './routes/appliance'
+import { Route as AppliancesRouteImport } from './routes/appliances'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as EnergyRouteImport } from './routes/energy'
-import { Route as ModelsRouteImport } from './routes/models'
-import { Route as PlanRouteImport } from './routes/plan'
+import { Route as EvaluationRouteImport } from './routes/evaluation'
+import { Route as ExplorerRouteImport } from './routes/explorer'
+import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as IngestionRouteImport } from './routes/ingestion'
 import { Route as RoutineRouteImport } from './routes/routine'
-import { Route as SensorsRouteImport } from './routes/sensors'
 import { Route as SettingsRouteImport } from './routes/settings'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,9 +37,9 @@ const AnomaliesRoute = AnomaliesRouteImport.update({
   path: '/anomalies',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApplianceRoute = ApplianceRouteImport.update({
-  id: '/appliance',
-  path: '/appliance',
+const AppliancesRoute = AppliancesRouteImport.update({
+  id: '/appliances',
+  path: '/appliances',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssistantRoute = AssistantRouteImport.update({
@@ -51,24 +52,29 @@ const EnergyRoute = EnergyRouteImport.update({
   path: '/energy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ModelsRoute = ModelsRouteImport.update({
-  id: '/models',
-  path: '/models',
+const EvaluationRoute = EvaluationRouteImport.update({
+  id: '/evaluation',
+  path: '/evaluation',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlanRoute = PlanRouteImport.update({
-  id: '/plan',
-  path: '/plan',
+const ExplorerRoute = ExplorerRouteImport.update({
+  id: '/explorer',
+  path: '/explorer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForecastRoute = ForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IngestionRoute = IngestionRouteImport.update({
+  id: '/ingestion',
+  path: '/ingestion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoutineRoute = RoutineRouteImport.update({
   id: '/routine',
   path: '/routine',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SensorsRoute = SensorsRouteImport.update({
-  id: '/sensors',
-  path: '/sensors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -81,26 +87,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
-  '/appliance': typeof ApplianceRoute
+  '/appliances': typeof AppliancesRoute
   '/assistant': typeof AssistantRoute
   '/energy': typeof EnergyRoute
-  '/models': typeof ModelsRoute
-  '/plan': typeof PlanRoute
+  '/evaluation': typeof EvaluationRoute
+  '/explorer': typeof ExplorerRoute
+  '/forecast': typeof ForecastRoute
+  '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
-  '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
-  '/appliance': typeof ApplianceRoute
+  '/appliances': typeof AppliancesRoute
   '/assistant': typeof AssistantRoute
   '/energy': typeof EnergyRoute
-  '/models': typeof ModelsRoute
-  '/plan': typeof PlanRoute
+  '/evaluation': typeof EvaluationRoute
+  '/explorer': typeof ExplorerRoute
+  '/forecast': typeof ForecastRoute
+  '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
-  '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
@@ -108,13 +116,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/activity': typeof ActivityRoute
   '/anomalies': typeof AnomaliesRoute
-  '/appliance': typeof ApplianceRoute
+  '/appliances': typeof AppliancesRoute
   '/assistant': typeof AssistantRoute
   '/energy': typeof EnergyRoute
-  '/models': typeof ModelsRoute
-  '/plan': typeof PlanRoute
+  '/evaluation': typeof EvaluationRoute
+  '/explorer': typeof ExplorerRoute
+  '/forecast': typeof ForecastRoute
+  '/ingestion': typeof IngestionRoute
   '/routine': typeof RoutineRoute
-  '/sensors': typeof SensorsRoute
   '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
@@ -123,39 +132,42 @@ export interface FileRouteTypes {
     | '/'
     | '/activity'
     | '/anomalies'
-    | '/appliance'
+    | '/appliances'
     | '/assistant'
     | '/energy'
-    | '/models'
-    | '/plan'
+    | '/evaluation'
+    | '/explorer'
+    | '/forecast'
+    | '/ingestion'
     | '/routine'
-    | '/sensors'
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/activity'
     | '/anomalies'
-    | '/appliance'
+    | '/appliances'
     | '/assistant'
     | '/energy'
-    | '/models'
-    | '/plan'
+    | '/evaluation'
+    | '/explorer'
+    | '/forecast'
+    | '/ingestion'
     | '/routine'
-    | '/sensors'
     | '/settings'
   id:
     | '__root__'
     | '/'
     | '/activity'
     | '/anomalies'
-    | '/appliance'
+    | '/appliances'
     | '/assistant'
     | '/energy'
-    | '/models'
-    | '/plan'
+    | '/evaluation'
+    | '/explorer'
+    | '/forecast'
+    | '/ingestion'
     | '/routine'
-    | '/sensors'
     | '/settings'
   fileRoutesById: FileRoutesById
 }
@@ -163,13 +175,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivityRoute: typeof ActivityRoute
   AnomaliesRoute: typeof AnomaliesRoute
-  ApplianceRoute: typeof ApplianceRoute
+  AppliancesRoute: typeof AppliancesRoute
   AssistantRoute: typeof AssistantRoute
   EnergyRoute: typeof EnergyRoute
-  ModelsRoute: typeof ModelsRoute
-  PlanRoute: typeof PlanRoute
+  EvaluationRoute: typeof EvaluationRoute
+  ExplorerRoute: typeof ExplorerRoute
+  ForecastRoute: typeof ForecastRoute
+  IngestionRoute: typeof IngestionRoute
   RoutineRoute: typeof RoutineRoute
-  SensorsRoute: typeof SensorsRoute
   SettingsRoute: typeof SettingsRoute
 }
 
@@ -196,11 +209,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AnomaliesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/appliance': {
-      id: '/appliance'
-      path: '/appliance'
-      fullPath: '/appliance'
-      preLoaderRoute: typeof ApplianceRouteImport
+    '/appliances': {
+      id: '/appliances'
+      path: '/appliances'
+      fullPath: '/appliances'
+      preLoaderRoute: typeof AppliancesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assistant': {
@@ -217,18 +230,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnergyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/models': {
-      id: '/models'
-      path: '/models'
-      fullPath: '/models'
-      preLoaderRoute: typeof ModelsRouteImport
+    '/evaluation': {
+      id: '/evaluation'
+      path: '/evaluation'
+      fullPath: '/evaluation'
+      preLoaderRoute: typeof EvaluationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/plan': {
-      id: '/plan'
-      path: '/plan'
-      fullPath: '/plan'
-      preLoaderRoute: typeof PlanRouteImport
+    '/explorer': {
+      id: '/explorer'
+      path: '/explorer'
+      fullPath: '/explorer'
+      preLoaderRoute: typeof ExplorerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forecast': {
+      id: '/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ingestion': {
+      id: '/ingestion'
+      path: '/ingestion'
+      fullPath: '/ingestion'
+      preLoaderRoute: typeof IngestionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/routine': {
@@ -236,13 +263,6 @@ declare module '@tanstack/react-router' {
       path: '/routine'
       fullPath: '/routine'
       preLoaderRoute: typeof RoutineRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sensors': {
-      id: '/sensors'
-      path: '/sensors'
-      fullPath: '/sensors'
-      preLoaderRoute: typeof SensorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -259,13 +279,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivityRoute: ActivityRoute,
   AnomaliesRoute: AnomaliesRoute,
-  ApplianceRoute: ApplianceRoute,
+  AppliancesRoute: AppliancesRoute,
   AssistantRoute: AssistantRoute,
   EnergyRoute: EnergyRoute,
-  ModelsRoute: ModelsRoute,
-  PlanRoute: PlanRoute,
+  EvaluationRoute: EvaluationRoute,
+  ExplorerRoute: ExplorerRoute,
+  ForecastRoute: ForecastRoute,
+  IngestionRoute: IngestionRoute,
   RoutineRoute: RoutineRoute,
-  SensorsRoute: SensorsRoute,
   SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
