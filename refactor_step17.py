@@ -315,3 +315,4 @@ with open(os.path.join(ROUTES_DIR, "routine.tsx"), "w", encoding="utf-8") as f:
     f.write(file_content)
 
 print("Routine.tsx massive upgrade completed.")
+

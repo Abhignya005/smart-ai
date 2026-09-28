@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TrendingUp, ActivitySquare, Database, Activity, HelpCircle, Check, X } from "lucide-react";
+import { TrendingUp, ActivitySquare, Database, Activity, HelpCircle, Check, X, History } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { loadDataset } from "@/lib/datasetUtils";
 import { calculateDashboardMetrics } from "@/lib/mlUtils";
