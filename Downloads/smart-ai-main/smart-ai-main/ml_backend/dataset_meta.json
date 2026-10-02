@@ -1,0 +1,188 @@
+{
+  "is_uploaded": true,
+  "filename": "HabitSense_30_Day_Single_Person_P001.csv",
+  "format": "CSV",
+  "rows": 390,
+  "columns_count": 10,
+  "columns": [
+    "timestamp",
+    "household_id",
+    "person_id",
+    "room",
+    "motion",
+    "door",
+    "light",
+    "tv_on",
+    "power_kw",
+    "activity"
+  ],
+  "person_column": "person_id",
+  "timestamp_column": "timestamp",
+  "activity_column": "activity",
+  "room_column": "room",
+  "sensor_features": [
+    "motion",
+    "power_kw",
+    "door",
+    "tv_on",
+    "activity"
+  ],
+  "detected_members": {
+    "count": 1,
+    "members": [
+      "P001"
+    ]
+  },
+  "time_range": "03/08/2026 \u2013 01/09/2026",
+  "missing_values": 0,
+  "quality_score": 100.0,
+  "detected_activities": [
+    "Sleeping",
+    "Eating",
+    "Working",
+    "Exercise",
+    "Relaxing",
+    "Watching TV",
+    "Cooking"
+  ],
+  "suitability": {
+    "activity_recognition": {
+      "supported": true,
+      "status": "Activity label detected"
+    },
+    "routine_discovery": {
+      "supported": true,
+      "status": "Timestamp detected"
+    },
+    "family_analysis": {
+      "supported": true,
+      "status": "Person ID detected (1 members)"
+    },
+    "room_analysis": {
+      "supported": true,
+      "status": "Room column/sensors detected"
+    }
+  },
+  "preview": [
+    {
+      "timestamp": "2026-08-03 07:05:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Bedroom",
+      "motion": "Yes",
+      "door": "No",
+      "light": "No",
+      "tv_on": "No",
+      "power_kw": 0.03,
+      "activity": "Sleeping"
+    },
+    {
+      "timestamp": "2026-08-03 07:23:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Kitchen",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.35,
+      "activity": "Eating"
+    },
+    {
+      "timestamp": "2026-08-03 07:57:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.16,
+      "activity": "Working"
+    },
+    {
+      "timestamp": "2026-08-03 10:30:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.19,
+      "activity": "Working"
+    },
+    {
+      "timestamp": "2026-08-03 13:01:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Kitchen",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.35,
+      "activity": "Eating"
+    },
+    {
+      "timestamp": "2026-08-03 13:28:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.16,
+      "activity": "Working"
+    },
+    {
+      "timestamp": "2026-08-03 17:29:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.27,
+      "activity": "Exercise"
+    },
+    {
+      "timestamp": "2026-08-03 18:13:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.14,
+      "activity": "Relaxing"
+    },
+    {
+      "timestamp": "2026-08-03 19:35:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Living Room",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "Yes",
+      "power_kw": 0.32,
+      "activity": "Watching TV"
+    },
+    {
+      "timestamp": "2026-08-03 20:27:00",
+      "household_id": "H_SINGLE_001",
+      "person_id": "P001",
+      "room": "Kitchen",
+      "motion": "Yes",
+      "door": "No",
+      "light": "Yes",
+      "tv_on": "No",
+      "power_kw": 0.93,
+      "activity": "Cooking"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+timestamp,household_id,person_id,room,motion,door,light,tv_on,power_kw,activity
+2026-09-01 06:45:00,H001,P002,Bedroom,1,0,0,0,0.05,Sleeping
+2026-09-01 07:00:00,H001,P001,Bedroom,1,0,0,0,0.05,Sleeping
+2026-09-01 07:15:00,H001,P002,Kitchen,1,0,1,0,1.07,Cooking
+2026-09-01 07:15:00,H001,P003,Bedroom,1,0,0,0,0.05,Sleeping
+2026-09-01 07:30:00,H001,P001,Kitchen,1,0,1,0,0.32,Eating
+2026-09-01 07:30:00,H001,P004,Bedroom,1,0,0,0,0.05,Sleeping
+2026-09-01 07:45:00,H001,P002,Kitchen,1,0,1,0,0.32,Eating
+2026-09-01 08:00:00,H001,P004,Kitchen,1,0,1,0,0.32,Eating
+2026-09-01 09:00:00,H001,P001,Living Room,1,0,1,0,0.17,Working
+2026-09-01 09:30:00,H001,P003,Bedroom,1,0,1,0,0.22,Studying

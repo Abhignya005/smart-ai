@@ -1,0 +1,16 @@
+{
+  "trained_on": "current_dataset.csv",
+  "records": 390,
+  "classes": [
+    "Cooking",
+    "Eating",
+    "Exercise",
+    "Relaxing",
+    "Sleeping",
+    "Watching TV",
+    "Working"
+  ],
+  "accuracy": 100.0,
+  "f1_score": 100.0,
+  "trained_at": "2026-10-02T20:00:20.069841"
+}

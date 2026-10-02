@@ -1,0 +1,122 @@
+[
+  {
+    "timestamp":"2026-09-01 06:45:00",
+    "household_id":"H001",
+    "person_id":"P002",
+    "room":"Bedroom",
+    "motion":1,
+    "door":0,
+    "light":0,
+    "tv_on":0,
+    "power_kw":0.05,
+    "activity":"Sleeping"
+  },
+  {
+    "timestamp":"2026-09-01 07:00:00",
+    "household_id":"H001",
+    "person_id":"P001",
+    "room":"Bedroom",
+    "motion":1,
+    "door":0,
+    "light":0,
+    "tv_on":0,
+    "power_kw":0.05,
+    "activity":"Sleeping"
+  },
+  {
+    "timestamp":"2026-09-01 07:15:00",
+    "household_id":"H001",
+    "person_id":"P002",
+    "room":"Kitchen",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":1.07,
+    "activity":"Cooking"
+  },
+  {
+    "timestamp":"2026-09-01 07:15:00",
+    "household_id":"H001",
+    "person_id":"P003",
+    "room":"Bedroom",
+    "motion":1,
+    "door":0,
+    "light":0,
+    "tv_on":0,
+    "power_kw":0.05,
+    "activity":"Sleeping"
+  },
+  {
+    "timestamp":"2026-09-01 07:30:00",
+    "household_id":"H001",
+    "person_id":"P001",
+    "room":"Kitchen",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":0.32,
+    "activity":"Eating"
+  },
+  {
+    "timestamp":"2026-09-01 07:30:00",
+    "household_id":"H001",
+    "person_id":"P004",
+    "room":"Bedroom",
+    "motion":1,
+    "door":0,
+    "light":0,
+    "tv_on":0,
+    "power_kw":0.05,
+    "activity":"Sleeping"
+  },
+  {
+    "timestamp":"2026-09-01 07:45:00",
+    "household_id":"H001",
+    "person_id":"P002",
+    "room":"Kitchen",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":0.32,
+    "activity":"Eating"
+  },
+  {
+    "timestamp":"2026-09-01 08:00:00",
+    "household_id":"H001",
+    "person_id":"P004",
+    "room":"Kitchen",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":0.32,
+    "activity":"Eating"
+  },
+  {
+    "timestamp":"2026-09-01 09:00:00",
+    "household_id":"H001",
+    "person_id":"P001",
+    "room":"Living Room",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":0.17,
+    "activity":"Working"
+  },
+  {
+    "timestamp":"2026-09-01 09:30:00",
+    "household_id":"H001",
+    "person_id":"P003",
+    "room":"Bedroom",
+    "motion":1,
+    "door":0,
+    "light":1,
+    "tv_on":0,
+    "power_kw":0.22,
+    "activity":"Studying"
+  }
+]
